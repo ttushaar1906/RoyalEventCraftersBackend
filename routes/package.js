@@ -26,6 +26,18 @@ router.get('/wedding', (req, res) => {
     });
 });
 
+router.get('/birthdayParty', (req, res) => {
+    connection.query('SELECT * FROM birthdayParty', (err, results) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error retrieving data from the database');
+        } else {
+            console.log(results);
+            res.json(results); // Send the results as JSON to the client
+        }
+    });
+});
+
 router.get('/wedding/:weddingCity', (req, res) => {
     const city = req.params.weddingCity;
 
