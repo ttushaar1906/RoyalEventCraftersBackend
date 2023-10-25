@@ -25,22 +25,34 @@ app.use('/packages',packages);
 
 // login
 const bcrypt = require('bcrypt');
+app.post('/signup', (req, res) => {
+  const email = req.body.email;
+  console.log(email)
+  const password = req.body.password;
+  console.log(password)
 
-app.post('/login', (req, res) => {
-  const { email, password } = req.body;
   connection.query('SELECT * FROM signup WHERE email = ?', email, (err, result) => {
     if (err) {
+      console.error(err); // Log the error for debugging
       res.status(500).send({ message: 'Login failed' });
     } else {
-      if (result.length === 1 && result[0].password === password) {
-        res.status(200).send({ message: 'Login successful' });
+      if (result.length === 1) {
+        bcrypt.compare(password, result[0].password, (bcryptErr, bcryptResult) => {
+          if (bcryptErr) {
+            console.error(bcryptErr); // Log the bcrypt error
+            res.status(500).send({ message: 'Login failed' });
+          } else if (bcryptResult) {
+            res.status(200).send({ message: 'Login successful' });
+          } else {
+            res.status(401).send({ message: 'Invalid username or password' });
+          }
+        });
       } else {
         res.status(401).send({ message: 'Invalid username or password' });
       }
     }
   });
 });
-
 
 // signup
 app.post('/signUp', (req, resp) => {

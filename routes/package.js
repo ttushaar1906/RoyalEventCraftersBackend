@@ -115,6 +115,30 @@ router.get('/RoyalEvent/birthdayparty/:partyType', (req, res) => {
     });
 });
 
+//conferences
+
+router.get('/RoyalEvent/:eventTitle', (req, res) => {
+    const place = req.params.eventTitle;
+
+    if (!place) {
+        return res.status(400).send('Event parameter is missing');
+    }
+
+    const sql = 'SELECT * FROM events WHERE eventTitle = ?';
+
+    connection.query(sql, [place], (err, results) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error retrieving data from the database');
+        } else {
+            console.log(results);
+            res.json(results); 
+        }
+    });
+});
+
+
+
 // where conditions
 // router.get('/wedding/weddingCity', (req, res) => {
 //     const condition = req.query.condition; // You can pass the condition as a query parameter
