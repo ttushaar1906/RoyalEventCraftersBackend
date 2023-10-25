@@ -14,6 +14,7 @@ connection.connect((err) => {
     console.log("Database connected");
 });
 
+// wedding
 router.get('/wedding', (req, res) => {
     connection.query('SELECT * FROM wedding', (err, results) => {
         if (err) {
@@ -26,17 +27,7 @@ router.get('/wedding', (req, res) => {
     });
 });
 
-router.get('/birthdayParty', (req, res) => {
-    connection.query('SELECT * FROM birthdayParty', (err, results) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send('Error retrieving data from the database');
-        } else {
-            console.log(results);
-            res.json(results); // Send the results as JSON to the client
-        }
-    });
-});
+//wedding where conditon
 
 router.get('/wedding/:weddingCity', (req, res) => {
     const city = req.params.weddingCity;
@@ -58,6 +49,7 @@ router.get('/wedding/:weddingCity', (req, res) => {
     });
 });
 
+//anniversary
 router.get('/anniversary', (req, res) => {
     connection.query('SELECT * FROM anniversary', (err, results) => {
         if (err) {
@@ -70,20 +62,73 @@ router.get('/anniversary', (req, res) => {
     });
 });
 
-// where conditions
-router.get('/wedding/weddingCity', (req, res) => {
-    const condition = req.query.condition; // You can pass the condition as a query parameter
-  
-    const query = 'SELECT * FROM wedding';
-    connection.query(query, [condition], (err, results) => {
-      if (err) {
-        console.error('Error querying MySQL:', err);
-        res.status(500).json({ error: 'Database error' });
-        return;
-      }
-      res.json(results);
+router.get('/RoyalEvent/anniversary/:placeTitle', (req, res) => {
+    const place = req.params.placeTitle;
+
+    if (!place) {
+        return res.status(400).send('City parameter is missing');
+    }
+
+    const sql = 'SELECT * FROM anniversary WHERE placeTitle = ?';
+
+    connection.query(sql, [place], (err, results) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error retrieving data from the database');
+        } else {
+            console.log(results);
+            res.json(results); 
+        }
     });
-  });
+});
+
+// birthdayParty
+router.get('/RoyalEvent/birthdayParty', (req, res) => {
+    connection.query('SELECT * FROM birthdayParty', (err, results) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error retrieving data from the database');
+        } else {
+            console.log(results);
+            res.json(results); // Send the results as JSON to the client
+        }
+    });
+});
+//where
+router.get('/RoyalEvent/birthdayparty/:partyType', (req, res) => {
+    const place = req.params.partyType;
+
+    if (!place) {
+        return res.status(400).send('City parameter is missing');
+    }
+
+    const sql = 'SELECT * FROM birthdayparty WHERE partyType = ?';
+
+    connection.query(sql, [place], (err, results) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error retrieving data from the database');
+        } else {
+            console.log(results);
+            res.json(results); 
+        }
+    });
+});
+
+// where conditions
+// router.get('/wedding/weddingCity', (req, res) => {
+//     const condition = req.query.condition; // You can pass the condition as a query parameter
+  
+//     const query = 'SELECT * FROM wedding';
+//     connection.query(query, [condition], (err, results) => {
+//       if (err) {
+//         console.error('Error querying MySQL:', err);
+//         res.status(500).json({ error: 'Database error' });
+//         return;
+//       }
+//       res.json(results);
+//     });
+//   });
 
 
 
