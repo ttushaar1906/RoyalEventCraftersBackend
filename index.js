@@ -43,6 +43,7 @@ app.post('/signup', (req, res) => {
             res.status(500).send({ message: 'Login failed' });
           } else if (bcryptResult) {
             res.status(200).send({ message: 'Login successful' });
+            
           } else {
             res.status(401).send({ message: 'Invalid username or password' });
           }

@@ -114,7 +114,6 @@ router.get('/RoyalEvent/birthdayparty/:partyType', (req, res) => {
         }
     });
 });
-
 //conferences
 
 router.get('/RoyalEvent/:eventTitle', (req, res) => {
@@ -137,7 +136,40 @@ router.get('/RoyalEvent/:eventTitle', (req, res) => {
     });
 });
 
+// other Items
 
+router.get('/RoyalEvent/wedding/otheritems', (req, res) => {
+
+    connection.query('SELECT * FROM otheritems', (err, results) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error retrieving data from the database');
+        } else {
+            console.log(results);
+            res.json(results); // Send the results as JSON to the client
+        }
+    });
+});
+
+
+    // const place = req.params.weddingCity;
+
+    // if (!place) {
+    //     return res.status(400).send('City parameter is missing');
+    // }
+
+    // const sql = 'SELECT * FROM otheritems';
+
+//     connection.query(sql, [place], (err, results) => {
+//         if (err) {
+//             console.error(err);
+//             res.status(500).send('Error retrieving data from the database');
+//         } else {
+//             console.log(results);
+//             res.json(results); 
+//         }
+//     });
+// });
 
 // where conditions
 // router.get('/wedding/weddingCity', (req, res) => {
