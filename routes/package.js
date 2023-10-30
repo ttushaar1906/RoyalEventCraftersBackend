@@ -15,7 +15,7 @@ connection.connect((err) => {
 });
 
 // wedding
-router.get('/wedding', (req, res) => {
+router.get('/RoyalEvent/wedding', (req, res) => {
     connection.query('SELECT * FROM wedding', (err, results) => {
         if (err) {
             console.error(err);
@@ -29,7 +29,7 @@ router.get('/wedding', (req, res) => {
 
 //wedding where conditon
 
-router.get('/wedding/:weddingCity', (req, res) => {
+router.get('/RoyalEvent/wedding/:weddingCity', (req, res) => {
     const city = req.params.weddingCity;
 
     if (!city) {
@@ -138,7 +138,7 @@ router.get('/RoyalEvent/:eventTitle', (req, res) => {
 
 // other Items
 
-router.get('/RoyalEvent/wedding/otheritems', (req, res) => {
+router.get('/RoyalEvent/wedding/:weddingCity/otheritems', (req, res) => {
 
     connection.query('SELECT * FROM otheritems', (err, results) => {
         if (err) {
