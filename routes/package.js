@@ -138,7 +138,7 @@ router.get('/RoyalEvent/:eventTitle', (req, res) => {
 
 // other Items
 
-router.get('/RoyalEvent/wedding/:weddingCity/otheritems', (req, res) => {
+router.get('/RoyalEvent/wedding/otheritems', (req, res) => {
 
     connection.query('SELECT * FROM otheritems', (err, results) => {
         if (err) {

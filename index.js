@@ -78,19 +78,22 @@ app.post('/signUp', (req, resp) => {
 
 // Feed Back
 
-app.post('/feed', (req, resp) => {
-    const name = req.body.name; // Corrected property name
+app.post('/orders', (req, resp) => {
+    const eventLoc = req.body.eventLoc; 
+    const username = req.body.username;
+    const mobileNo = req.body.mobileNo;
     const email = req.body.email;
-    const user_mobileno = req.body.user_mobileno;
-    const rating = req.body.rating;
-    const message = req.body.message;
+    const bookingDate = req.body.bookingDate;
+    const noOfGuests = req.body.noOfGuests;
+    const eventTime = req.body.eventTime;
 
-    connection.query('INSERT into feedback (name, email, user_mobileno, rating, message) VALUES (?, ?, ?, ?, ?)', [name, email, user_mobileno, rating, message], (error, results, fields) => {
+
+    connection.query('INSERT into orders (eventLoc,username, mobileNo,email,  bookingDate, noOfGuests,eventTime) VALUES (?, ?, ?, ?, ?,?,?)', [eventLoc,username, mobileNo,email, bookingDate, noOfGuests, eventTime], (error, results, fields) => {
         if (error) {
             console.error(error);
-            resp.status(500).send('Error while submitting feedback'); // Respond with an error status
+            resp.status(500).send('Failed to place Order'); // Respond with an error status
         } else {
-            console.log('Feedback has been added to the database.');
+            console.log('Order has been added to the database.');
             resp.sendStatus(200); // Respond with a success status
         }
     });
@@ -117,5 +120,26 @@ app.post('/Contact', (req, resp) => {
     }
   );
 });
+
+//orders
+app.post('/feed', (req, resp) => {
+  const name = req.body.name; // Corrected property name
+  const email = req.body.email;
+  const user_mobileno = req.body.user_mobileno;
+  const rating = req.body.rating;
+  const message = req.body.message;
+
+  connection.query('INSERT into feedback (name, email, user_mobileno, rating, message) VALUES (?, ?, ?, ?, ?)', [name, email, user_mobileno, rating, message], (error, results, fields) => {
+      if (error) {
+          console.error(error);
+          resp.status(500).send('Error while submitting feedback'); // Respond with an error status
+      } else {
+          console.log('Feedback has been added to the database.');
+          resp.sendStatus(200); // Respond with a success status
+      }
+  });
+});
+
+
 
 app.listen(4000);
