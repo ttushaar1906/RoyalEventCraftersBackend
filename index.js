@@ -76,7 +76,7 @@ app.post('/signUp', (req, resp) => {
   );
 });
 
-// Feed Back
+// orders
 
 app.post('/orders', (req, resp) => {
     const eventLoc = req.body.eventLoc; 
@@ -86,9 +86,12 @@ app.post('/orders', (req, resp) => {
     const bookingDate = req.body.bookingDate;
     const noOfGuests = req.body.noOfGuests;
     const eventTime = req.body.eventTime;
+    const city = req.body.city;
+    const address = req.body.address;
 
 
-    connection.query('INSERT into orders (eventLoc,username, mobileNo,email,  bookingDate, noOfGuests,eventTime) VALUES (?, ?, ?, ?, ?,?,?)', [eventLoc,username, mobileNo,email, bookingDate, noOfGuests, eventTime], (error, results, fields) => {
+
+    connection.query('INSERT into orders (eventLoc,username, mobileNo,email,  bookingDate, noOfGuests,eventTime,city,address) VALUES (?, ?, ?, ?, ?,?,?,?,?)', [eventLoc,username, mobileNo,email, bookingDate, noOfGuests, eventTime,city,address], (error, results, fields) => {
         if (error) {
             console.error(error);
             resp.status(500).send('Failed to place Order'); // Respond with an error status
@@ -121,7 +124,7 @@ app.post('/Contact', (req, resp) => {
   );
 });
 
-//orders
+// Feed Back
 app.post('/feed', (req, resp) => {
   const name = req.body.name; // Corrected property name
   const email = req.body.email;
