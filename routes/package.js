@@ -151,6 +151,31 @@ router.get('/RoyalEvent/wedding/otheritems', (req, res) => {
     });
 });
 
+//awards ceremony
+
+router.get('/RoyalEvent/AwardCeremony', (req, res) => {
+    connection.query('SELECT * FROM awardceremony', (err, results) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error retrieving data from the database');
+        } else {
+            console.log(results);
+            res.json(results); // Send the results as JSON to the client
+        }
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
 
     // const place = req.params.weddingCity;
 
