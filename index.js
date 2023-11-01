@@ -87,17 +87,18 @@ app.post('/orders', (req, resp) => {
     const noOfGuests = req.body.noOfGuests;
     const eventTime = req.body.eventTime;
     const city = req.body.city;
-    const address = req.body.address;
+    const addresss = req.body.addresss;
 
 
 
-    connection.query('INSERT into orders (eventLoc,username, mobileNo,email,  bookingDate, noOfGuests,eventTime,city,address) VALUES (?, ?, ?, ?, ?,?,?,?,?)', [eventLoc,username, mobileNo,email, bookingDate, noOfGuests, eventTime,city,address], (error, results, fields) => {
+    connection.query('INSERT into orders (eventLoc,username, mobileNo,email,  bookingDate, noOfGuests,eventTime,city,addresss) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [eventLoc,username, mobileNo,email, bookingDate, noOfGuests, eventTime,city,addresss], (error, results, fields) => {
         if (error) {
             console.error(error);
             resp.status(500).send('Failed to place Order'); // Respond with an error status
         } else {
             console.log('Order has been added to the database.');
             resp.sendStatus(200); // Respond with a success status
+            navigate('Thanks');
         }
     });
 });

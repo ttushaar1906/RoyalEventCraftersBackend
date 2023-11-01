@@ -114,46 +114,12 @@ router.get('/RoyalEvent/birthdayparty/:partyType', (req, res) => {
         }
     });
 });
-//conferences
-
-router.get('/RoyalEvent/:eventTitle', (req, res) => {
-    const place = req.params.eventTitle;
-
-    if (!place) {
-        return res.status(400).send('Event parameter is missing');
-    }
-
-    const sql = 'SELECT * FROM events WHERE eventTitle = ?';
-
-    connection.query(sql, [place], (err, results) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send('Error retrieving data from the database');
-        } else {
-            console.log(results);
-            res.json(results); 
-        }
-    });
-});
 
 // other Items
 
-router.get('/RoyalEvent/wedding/otheritems', (req, res) => {
-
-    connection.query('SELECT * FROM otheritems', (err, results) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send('Error retrieving data from the database');
-        } else {
-            console.log(results);
-            res.json(results); // Send the results as JSON to the client
-        }
-    });
-});
-
 //awards ceremony
 
-router.get('/RoyalEvent/AwardCeremony', (req, res) => {
+router.get('/RoyalEvent/awardceremony', (req, res) => {
     connection.query('SELECT * FROM awardceremony', (err, results) => {
         if (err) {
             console.error(err);
@@ -165,9 +131,46 @@ router.get('/RoyalEvent/AwardCeremony', (req, res) => {
     });
 });
 
+//conferences
 
+router.get('/RoyalEvent/conferences', (req, res) => {
+    connection.query('SELECT * FROM conferences', (err, results) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error retrieving data from the database');
+        } else {
+            console.log(results);
+            res.json(results); // Send the results as JSON to the client
+        }
+    });
+});
 
+// brandlaunch
 
+router.get('/RoyalEvent/brandlaunch', (req, res) => {
+    connection.query('SELECT * FROM brandlaunch', (err, results) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error retrieving data from the database');
+        } else {
+            console.log(results);
+            res.json(results); // Send the results as JSON to the client
+        }
+    });
+});
+
+// pressconferences
+router.get('/RoyalEvent/pressconferences', (req, res) => {
+    connection.query('SELECT * FROM pressconferences', (err, results) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error retrieving data from the database');
+        } else {
+            console.log(results);
+            res.json(results); // Send the results as JSON to the client
+        }
+    });
+});
 
 
 
