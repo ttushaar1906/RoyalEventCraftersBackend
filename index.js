@@ -56,7 +56,7 @@ app.post('/signup', (req, res) => {
 });
 
 // signup
-app.post('/signUp', (req, resp) => {
+app.post('/signup', (req, resp) => {
   const username = req.body.username;
   const email = req.body.email;
   const password = req.body.password;
@@ -88,9 +88,6 @@ app.post('/orders', (req, resp) => {
     const eventTime = req.body.eventTime;
     const city = req.body.city;
     const addresss = req.body.addresss;
-
-
-
     connection.query('INSERT into orders (eventLoc,username, mobileNo,email,  bookingDate, noOfGuests,eventTime,city,addresss) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [eventLoc,username, mobileNo,email, bookingDate, noOfGuests, eventTime,city,addresss], (error, results, fields) => {
         if (error) {
             console.error(error);
@@ -98,7 +95,6 @@ app.post('/orders', (req, resp) => {
         } else {
             console.log('Order has been added to the database.');
             resp.sendStatus(200); // Respond with a success status
-            navigate('Thanks');
         }
     });
 });
