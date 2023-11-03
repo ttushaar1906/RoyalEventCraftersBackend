@@ -14,6 +14,8 @@ connection.connect((err) => {
     console.log("Database connected");
 });
 
+
+
 // wedding
 router.get('/RoyalEvent/wedding', (req, res) => {
     connection.query('SELECT * FROM wedding', (err, results) => {
@@ -116,6 +118,21 @@ router.get('/RoyalEvent/birthdayparty/:partyType', (req, res) => {
 });
 
 // other Items
+
+router.get('/wedding/otheritems', (req, res) => {
+    connection.query('SELECT * FROM otheritems', (err, results) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error retrieving data from the database');
+        } else {
+            console.log(results);
+            res.json(results); // Send the results as JSON to the client
+        }
+    });
+})
+  
+  
+
 
 //awards ceremony
 
