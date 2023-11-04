@@ -24,43 +24,29 @@ const packages =require('./routes/package');
 app.use('/packages',packages);
 
 // login
-const bcrypt = require('bcrypt');
-app.post('/signup', (req, res) => {
-  const email = req.body.email;
-  console.log(email)
-  const password = req.body.password;
-  console.log(password)
+app.post("/login", (req, resp) => {
+  const { email, password } = req.body;
+  console.log(email,password)
+  connection.query(
+    "SELECT * FROM signup WHERE email = ? AND password = ?", [email, password],
+    (error, result) => {
+        if (error) {
+            console.error("Error executing query:");
+            return resp.status(500).send("Server error");
+        }
 
-  connection.query('SELECT * FROM signup WHERE email = ?', email, (err, result) => {
-    if (err) {
-      console.error(err); // Log the error for debugging
-      res.status(500).send({ message: 'Login failed' });
-    } else {
-      if (result.length === 1) {
-        bcrypt.compare(password, result[0].password, (bcryptErr, bcryptResult) => {
-          if (bcryptErr) {
-            console.error(bcryptErr); // Log the bcrypt error
-            res.status(500).send({ message: 'Login failed' });
-          } else if (bcryptResult) {
-            res.status(200).send({ message: 'Login successful' });
-            
-          } else {
-            res.status(401).send({ message: 'Invalid username or password' });
-          }
-        });
-      } else {
-        res.status(401).send({ message: 'Invalid username or password' });
-      }
+        if (result.length === 0) {
+            return resp.status(401).send("Invalid UserName or Password");
+        }
+       
     }
-  });
+);
 });
 
 // signup
 app.post('/signup', (req, resp) => {
-  const username = req.body.username;
-  const email = req.body.email;
-  const password = req.body.password;
-
+  const { username, email, password } = req.body;
+  
   connection.query(
     'INSERT into signup (username, email, password) VALUES (?, ?, ?)',
     [username, email, password],
