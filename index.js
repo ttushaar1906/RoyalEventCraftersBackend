@@ -66,6 +66,7 @@ app.post('/signup', (req, resp) => {
 
 app.post('/orders', (req, resp) => {
     const eventLoc = req.body.eventLoc; 
+    console.log(eventLoc)
     const username = req.body.username;
     const mobileNo = req.body.mobileNo;
     const email = req.body.email;
@@ -74,7 +75,16 @@ app.post('/orders', (req, resp) => {
     const eventTime = req.body.eventTime;
     const city = req.body.city;
     const addresss = req.body.addresss;
-    connection.query('INSERT into orders (eventLoc,username, mobileNo,email,  bookingDate, noOfGuests,eventTime,city,addresss) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [eventLoc,username, mobileNo,email, bookingDate, noOfGuests, eventTime,city,addresss], (error, results, fields) => {
+    const chairs = req.body.chairs;
+    const ExtraPlates = req.body.ExtraPlates;
+    const Dj = req.body.Dj;
+    const FogMachine = req.body.FogMachine;
+    const LightsSet = req.body.LightsSet;
+    const MicSoundSystem = req.body.MicSoundSystem;
+
+
+
+    connection.query('INSERT into orders (eventLoc,username, mobileNo,email,  bookingDate, noOfGuests,eventTime,city,addresss,chairs,MicSoundSystem,Dj,FogMachine,LightsSet) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,?,?, ?,?)', [eventLoc,username, mobileNo,email, bookingDate, noOfGuests, eventTime,city,addresss,chairs,MicSoundSystem,ExtraPlates,Dj,FogMachine,LightsSet], (error, results, fields) => {
         if (error) {
             console.error(error);
             resp.status(500).send('Failed to place Order'); // Respond with an error status
