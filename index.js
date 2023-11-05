@@ -65,26 +65,28 @@ app.post('/signup', (req, resp) => {
 // orders
 
 app.post('/orders', (req, resp) => {
-    const eventLoc = req.body.eventLoc; 
-    console.log(eventLoc)
-    const username = req.body.username;
-    const mobileNo = req.body.mobileNo;
-    const email = req.body.email;
-    const bookingDate = req.body.bookingDate;
-    const noOfGuests = req.body.noOfGuests;
-    const eventTime = req.body.eventTime;
-    const city = req.body.city;
-    const addresss = req.body.addresss;
-    const chairs = req.body.chairs;
-    const ExtraPlates = req.body.ExtraPlates;
-    const Dj = req.body.Dj;
-    const FogMachine = req.body.FogMachine;
-    const LightsSet = req.body.LightsSet;
-    const MicSoundSystem = req.body.MicSoundSystem;
+    /* 1*/   const eventLoc = req.body.eventLoc;
+      console.log(eventLoc)
+    /* 2*/ const username = req.body.username; 
+    /* 3*/ const mobileNo = req.body.mobileNo;
+    /* 4*/ const email = req.body.email;
+    /* 5*/ const bookingDate = req.body.bookingDate;
+    /* 6*/ const noOfGuests = req.body.noOfGuests;
+    /* 7*/ const eventTime = req.body.eventTime;
+    /* 8*/ const city = req.body.city;
+    console.log(city)
+    /* 9*/ const addresss = req.body.addresss;
+    
+    // const chairs = req.body.chairs;
+    // const ExtraPlates = req.body.ExtraPlates;
+    // const Dj = req.body.Dj;
+    // const FogMachine = req.body.FogMachine;
+    // const LightsSet = req.body.LightsSet;
+    // const MicSoundSystem = req.body.MicSoundSystem;
 
 
 
-    connection.query('INSERT into orders (eventLoc,username, mobileNo,email,  bookingDate, noOfGuests,eventTime,city,addresss,chairs,MicSoundSystem,Dj,FogMachine,LightsSet) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,?,?, ?,?)', [eventLoc,username, mobileNo,email, bookingDate, noOfGuests, eventTime,city,addresss,chairs,MicSoundSystem,ExtraPlates,Dj,FogMachine,LightsSet], (error, results, fields) => {
+    connection.query('INSERT into orders (eventLoc,username, mobileNo,email,  bookingDate, noOfGuests,eventTime,city,addresss) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?)', [eventLoc,username, mobileNo,email, bookingDate, noOfGuests, eventTime,city,addresss], (error, results, fields) => {
         if (error) {
             console.error(error);
             resp.status(500).send('Failed to place Order'); // Respond with an error status
@@ -93,7 +95,7 @@ app.post('/orders', (req, resp) => {
             resp.sendStatus(200); // Respond with a success status
         }
     });
-});
+})
 
 // contant us
 app.post('/Contact', (req, resp) => {
