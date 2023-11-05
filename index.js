@@ -66,7 +66,7 @@ app.post('/signup', (req, resp) => {
 
 app.post('/orders', (req, resp) => {
     /* 1*/   const eventLoc = req.body.eventLoc;
-      console.log(eventLoc)
+
     /* 2*/ const username = req.body.username; 
     /* 3*/ const mobileNo = req.body.mobileNo;
     /* 4*/ const email = req.body.email;
@@ -74,7 +74,6 @@ app.post('/orders', (req, resp) => {
     /* 6*/ const noOfGuests = req.body.noOfGuests;
     /* 7*/ const eventTime = req.body.eventTime;
     /* 8*/ const city = req.body.city;
-    console.log(city)
     /* 9*/ const addresss = req.body.addresss;
     
     // const chairs = req.body.chairs;
