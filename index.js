@@ -26,22 +26,25 @@ app.use('/packages',packages);
 // login
 app.post("/login", (req, resp) => {
   const { email, password } = req.body;
-  console.log(email,password)
   connection.query(
-    "SELECT * FROM signup WHERE email = ? AND password = ?", [email, password],
+    "SELECT * FROM signup WHERE email = ? AND password = ?",
+    [email, password],
     (error, result) => {
-        if (error) {
-            console.error("Error executing query:");
-            return resp.status(500).send("Server error");
-        }
+      if (error) {
+        console.error("Error executing query:");
+        return resp.status(500).send("Server error");
+      }
 
-        if (result.length === 0) {
-            return resp.status(401).send("Invalid UserName or Password");
-        }
-       
+      if (result.length === 0) {
+        return resp.status(401).send("Invalid UserName or Password");
+      }
+
+      // User authentication successful
+      resp.status(200).send("Login successful");
     }
-);
+  );
 });
+
 
 // signup
 app.post('/signup', (req, resp) => {
