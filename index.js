@@ -69,7 +69,6 @@ app.post('/signup', (req, resp) => {
 
 app.post('/orders', (req, resp) => {
     /* 1*/   const eventLoc = req.body.eventLoc;
-
     /* 2*/ const username = req.body.username; 
     /* 3*/ const mobileNo = req.body.mobileNo;
     /* 4*/ const email = req.body.email;
@@ -78,6 +77,17 @@ app.post('/orders', (req, resp) => {
     /* 7*/ const eventTime = req.body.eventTime;
     /* 8*/ const city = req.body.city;
     /* 9*/ const addresss = req.body.addresss;
+    /* 10*/ const Host = req.body.Host;
+    /* 11*/ const BallonDeco = req.body.BallonDeco;
+    /* 12*/ const Godi = req.body.Godi;
+    /* 13*/ const Car = req.body.Car;
+    /* 14*/ const Pandit = req.body.Pandit;
+    /* 15*/ const PaperBlast = req.body.PaperBlast;
+    /* 16*/ const FogMachine = req.body.FogMachine;
+    /* 17*/ const MicSound = req.body.MicSound;
+    /* 18*/ const MicSoundScreen = req.body.MicSoundScreen;
+     /* 19*/ const FlowerDeco = req.body.FlowerDeco;
+       /* 20*/ const Chairs = req.body.Chairs;
     
     // const chairs = req.body.chairs;
     // const ExtraPlates = req.body.ExtraPlates;
@@ -88,7 +98,7 @@ app.post('/orders', (req, resp) => {
 
 
 
-    connection.query('INSERT into orders (eventLoc,username, mobileNo,email,  bookingDate, noOfGuests,eventTime,city,addresss) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?)', [eventLoc,username, mobileNo,email, bookingDate, noOfGuests, eventTime,city,addresss], (error, results, fields) => {
+    connection.query('INSERT into orders (eventLoc,username, mobileNo,email,  bookingDate, noOfGuests,eventTime,city,addresss,Host,BallonDeco,Godi,Car,Pandit,PaperBlast,FogMachine,MicSound,MicSoundScreen,FlowerDeco,Chairs) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?)', [eventLoc,username, mobileNo,email, bookingDate, noOfGuests, eventTime,city,addresss,Host,BallonDeco,Godi,Car,Pandit,PaperBlast,FogMachine,MicSound,MicSoundScreen,FlowerDeco,Chairs], (error, results, fields) => {
         if (error) {
             console.error(error);
             resp.status(500).send('Failed to place Order'); // Respond with an error status
@@ -103,7 +113,7 @@ app.post('/orders', (req, resp) => {
 app.post('/Contact', (req, resp) => {
   const name = req.body.name;
   const email = req.body.email;
-  const mobileNO = req.body.mobileNO; // Corrected field name
+  const mobileNO = req.body.mobileNO; 
   const message = req.body.message;
 
   connection.query(
@@ -123,7 +133,7 @@ app.post('/Contact', (req, resp) => {
 
 // Feed Back
 app.post('/feed', (req, resp) => {
-  const name = req.body.name; // Corrected property name
+  const name = req.body.name; 
   const email = req.body.email;
   const user_mobileno = req.body.user_mobileno;
   const rating = req.body.rating;
