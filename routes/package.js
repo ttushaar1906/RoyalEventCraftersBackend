@@ -96,6 +96,7 @@ router.get('/RoyalEvent/birthdayParty', (req, res) => {
         }
     });
 });
+
 //where
 router.get('/RoyalEvent/birthdayparty/:partyType', (req, res) => {
     const place = req.params.partyType;
@@ -131,9 +132,6 @@ router.get('/wedding/otheritems', (req, res) => {
     });
 })
   
-  
-
-
 //awards ceremony
 
 router.get('/RoyalEvent/awardceremony', (req, res) => {
@@ -189,48 +187,28 @@ router.get('/RoyalEvent/pressconferences', (req, res) => {
     });
 });
 
+//Bill
 
-
-
-
-
-
-
-
-    // const place = req.params.weddingCity;
+router.get('/Bill', (req, res) => {
+    // const place = req.params.partyType;
 
     // if (!place) {
     //     return res.status(400).send('City parameter is missing');
     // }
+    // const sql = 'SELECT * FROM orders WHERE partyType = ?';
 
-    // const sql = 'SELECT * FROM otheritems';
+    const sql = 'SELECT * FROM orders ';
 
-//     connection.query(sql, [place], (err, results) => {
-//         if (err) {
-//             console.error(err);
-//             res.status(500).send('Error retrieving data from the database');
-//         } else {
-//             console.log(results);
-//             res.json(results); 
-//         }
-//     });
-// });
-
-// where conditions
-// router.get('/wedding/weddingCity', (req, res) => {
-//     const condition = req.query.condition; // You can pass the condition as a query parameter
-  
-//     const query = 'SELECT * FROM wedding';
-//     connection.query(query, [condition], (err, results) => {
-//       if (err) {
-//         console.error('Error querying MySQL:', err);
-//         res.status(500).json({ error: 'Database error' });
-//         return;
-//       }
-//       res.json(results);
-//     });
-//   });
-
+    connection.query(sql, [place], (err, results) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error retrieving data from the database');
+        } else {
+            console.log(results);
+            res.json(results); 
+        }
+    });
+});
 
 
 router.post('/',(req,res)=>{
