@@ -68,7 +68,7 @@ app.post('/signup', (req, resp) => {
 // orders
 
 app.post('/orders', (req, resp) => {
-    /* 1*/   const eventLoc = req.body.eventLoc;
+    /* 1*/const eventLoc = req.body.eventLoc;
     /* 2*/ const username = req.body.username; 
     /* 3*/ const mobileNo = req.body.mobileNo;
     /* 4*/ const email = req.body.email;
@@ -77,27 +77,29 @@ app.post('/orders', (req, resp) => {
     /* 7*/ const eventTime = req.body.eventTime;
     /* 8*/ const city = req.body.city;
     /* 9*/ const addresss = req.body.addresss;
-    /* 10*/ const Host = req.body.Host;
-    /* 11*/ const BallonDeco = req.body.BallonDeco;
-    /* 12*/ const Godi = req.body.Godi;
-    /* 13*/ const Car = req.body.Car;
-    /* 14*/ const Pandit = req.body.Pandit;
-    /* 15*/ const PaperBlast = req.body.PaperBlast;
-    /* 16*/ const FogMachine = req.body.FogMachine;
-    /* 17*/ const MicSound = req.body.MicSound;
-    /* 18*/ const MicSoundScreen = req.body.MicSoundScreen;
-    /* 19*/ const FlowerDeco = req.body.FlowerDeco;
-    /* 20*/ const Chairs = req.body.Chairs;
-    /*21*/  const Plates = req.body.Plates;
-    /*22*/  const Tables = req.body.Tables;
-    /*23*/  const LightSet = req.body.LightSet
-    
-    connection.query('INSERT into orders (eventLoc,username, mobileNo,email,  bookingDate, noOfGuests,eventTime,city,addresss,Host,BallonDeco,Godi,Car,Pandit,PaperBlast,FogMachine,MicSound,MicSoundScreen,FlowerDeco,Chairs,Plates,Tables,LightSet) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', [eventLoc,username, mobileNo,email, bookingDate, noOfGuests, eventTime,city,addresss,Host,BallonDeco,Godi,Car,Pandit,PaperBlast,FogMachine,MicSound,MicSoundScreen,FlowerDeco,Chairs,Plates,Tables,LightSet], (error, results, fields) => {
+    /* 10*/const placePrice = req.body.placePrice;
+    /* 11*/ const Host = req.body.Host;
+    /* 12*/ const BallonDeco = req.body.BallonDeco;
+    /* 13*/ const Godi = req.body.Godi;
+    /* 14*/ const Car = req.body.Car;
+    /* 15*/ const Pandit = req.body.Pandit;
+    /* 16*/ const PaperBlast = req.body.PaperBlast;
+    /* 17*/ const FogMachine = req.body.FogMachine;
+    /* 18*/ const MicSound = req.body.MicSound;
+    /* 19*/ const MicSoundScreen = req.body.MicSoundScreen;
+    /* 20*/ const FlowerDeco = req.body.FlowerDeco;
+    /* 21*/ const Chairs = req.body.Chairs;
+    /*22*/  const Plates = req.body.Plates;
+    /*23*/  const Tables = req.body.Tables;
+    /*24*/  const LightSet = req.body.LightSet;
+
+    connection.query('INSERT into orders (eventLoc,username, mobileNo,email,  bookingDate, noOfGuests,eventTime,city,addresss,Host,BallonDeco,Godi,Car,Pandit,PaperBlast,FogMachine,MicSound,MicSoundScreen,FlowerDeco,Chairs,Plates,Tables,LightSet,placePrice) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', [eventLoc,username, mobileNo,email, bookingDate, noOfGuests, eventTime,city,addresss,Host,BallonDeco,Godi,Car,Pandit,PaperBlast,FogMachine,MicSound,MicSoundScreen,FlowerDeco,Chairs,Plates,Tables,LightSet,placePrice], (error, results, fields) => {
         if (error) {
             console.error(error);
             resp.status(500).send('Failed to place Order'); // Respond with an error status
         } else {
             console.log('Order has been added to the database.');
+            // console.log(price);
             resp.sendStatus(200); // Respond with a success status
         }
     });
