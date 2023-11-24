@@ -189,28 +189,33 @@ router.get('/RoyalEvent/pressconferences', (req, res) => {
 
 //Bill
 
-router.get('/Bill', (req, res) => {
-    // const place = req.params.partyType;
+router.get('/RoyalEvent/bill/:eventLoc',(req,res)=>{
+    const event = req.params.eventLoc;
+    if (!event){
+        return res.status(400).send('Username not found');
+    }
+    connection.query('SELECT * from orders where eventLoc = ?',(err,results)=>{
+        if(err){
+            res.status(500).send('Error retrieving data from the database');
+        } else {
+            console.log(results);
+            res.json(results); // Send the results as JSON to the client
+        }
+    });
+});
 
-    // if (!place) {
-    //     return res.status(400).send('City parameter is missing');
-    // }
-    // const sql = 'SELECT * FROM orders WHERE partyType = ?';
-
-    const sql = 'SELECT * FROM orders ';
-
-    connection.query(sql, [place], (err, results) => {
+//Admi
+router.get('/RoyalEvent/Admi', (req, res) => {
+    connection.query('SELECT * FROM orders order by bookingDate' , (err, results) => {
         if (err) {
             console.error(err);
             res.status(500).send('Error retrieving data from the database');
         } else {
             console.log(results);
-            res.json(results); 
+            res.json(results); // Send the results as JSON to the client
         }
     });
 });
-
-
 router.post('/',(req,res)=>{
     this.connect.query()
 })
