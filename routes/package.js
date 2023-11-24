@@ -204,7 +204,8 @@ router.get('/RoyalEvent/bill/:eventLoc',(req,res)=>{
     });
 });
 
-//Admi
+//Admi section
+//  1 ) Orders
 router.get('/RoyalEvent/Admi', (req, res) => {
     connection.query('SELECT * FROM orders order by bookingDate' , (err, results) => {
         if (err) {
@@ -216,6 +217,33 @@ router.get('/RoyalEvent/Admi', (req, res) => {
         }
     });
 });
+//  2 Contact Us
+router.get('/RoyalEvent/Admi/contact', (req, res) => {
+    connection.query('SELECT * FROM contactus' , (err, results) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error retrieving data from the database');
+        } else {
+            console.log(results);
+            res.json(results); // Send the results as JSON to the client
+        }
+    });
+});
+
+// 3 Feedback
+
+router.get('/RoyalEvent/Admi/review', (req, res) => {
+    connection.query('SELECT * FROM feedback' , (err, results) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error retrieving data from the database');
+        } else {
+            console.log(results);
+            res.json(results); // Send the results as JSON to the client
+        }
+    });
+});
+
 router.post('/',(req,res)=>{
     this.connect.query()
 })
