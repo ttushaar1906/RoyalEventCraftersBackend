@@ -92,14 +92,16 @@ app.post('/orders', (req, resp) => {
     /*22*/  const Plates = req.body.Plates;
     /*23*/  const Tables = req.body.Tables;
     /*24*/  const LightSet = req.body.LightSet;
-    /*25*/  const totalprice = req.body.totalprice;
+    /*26 */ const photography = req.body.photography;
+    /*25*/  const totalCost = req.body.totalCost;
 
-    connection.query('INSERT into orders (eventLoc,username, mobileNo,email,  bookingDate, noOfGuests,eventTime,city,addresss,Host,BallonDeco,Godi,Car,Pandit,PaperBlast,FogMachine,MicSound,MicSoundScreen,FlowerDeco,Chairs,Plates,Tables,LightSet,placePrice,totalprice) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', [eventLoc,username, mobileNo,email, bookingDate, noOfGuests, eventTime,city,addresss,Host,BallonDeco,Godi,Car,Pandit,PaperBlast,FogMachine,MicSound,MicSoundScreen,FlowerDeco,Chairs,Plates,Tables,LightSet,placePrice,totalprice], (error, results, fields) => {
+    connection.query('INSERT into orders (eventLoc,username, mobileNo,email,  bookingDate, noOfGuests,eventTime,city,addresss,Host,BallonDeco,Godi,Car,Pandit,PaperBlast,FogMachine,MicSound,MicSoundScreen,FlowerDeco,Chairs,Plates,Tables,LightSet,placePrice,photography,totalCost) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', [eventLoc,username, mobileNo,email, bookingDate, noOfGuests, eventTime,city,addresss,Host,BallonDeco,Godi,Car,Pandit,PaperBlast,FogMachine,MicSound,MicSoundScreen,FlowerDeco,Chairs,Plates,Tables,LightSet,placePrice,photography,totalCost], (error, results, fields) => {
         if (error) {
             console.error(error);
             resp.status(500).send('Failed to place Order'); // Respond with an error status
         } else {
             console.log('Order has been added to the database.');
+            console.log(totalCost);
             // console.log(price);
             resp.sendStatus(200); // Respond with a success status
         }
