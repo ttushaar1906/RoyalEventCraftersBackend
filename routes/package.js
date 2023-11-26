@@ -189,20 +189,7 @@ router.get('/RoyalEvent/pressconferences', (req, res) => {
 
 //Bill
 
-router.get('/RoyalEvent/bill/:eventLoc',(req,res)=>{
-    const event = req.params.eventLoc;
-    if (!event){
-        return res.status(400).send('Username not found');
-    }
-    connection.query('SELECT * from orders where eventLoc = ?',(err,results)=>{
-        if(err){
-            res.status(500).send('Error retrieving data from the database');
-        } else {
-            console.log(results);
-            res.json(results); // Send the results as JSON to the client
-        }
-    });
-});
+
 
 //Admi section
 //  1 ) Orders

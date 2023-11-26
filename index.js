@@ -92,8 +92,9 @@ app.post('/orders', (req, resp) => {
     /*22*/  const Plates = req.body.Plates;
     /*23*/  const Tables = req.body.Tables;
     /*24*/  const LightSet = req.body.LightSet;
+    /*25*/  const totalprice = req.body.totalprice;
 
-    connection.query('INSERT into orders (eventLoc,username, mobileNo,email,  bookingDate, noOfGuests,eventTime,city,addresss,Host,BallonDeco,Godi,Car,Pandit,PaperBlast,FogMachine,MicSound,MicSoundScreen,FlowerDeco,Chairs,Plates,Tables,LightSet,placePrice) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', [eventLoc,username, mobileNo,email, bookingDate, noOfGuests, eventTime,city,addresss,Host,BallonDeco,Godi,Car,Pandit,PaperBlast,FogMachine,MicSound,MicSoundScreen,FlowerDeco,Chairs,Plates,Tables,LightSet,placePrice], (error, results, fields) => {
+    connection.query('INSERT into orders (eventLoc,username, mobileNo,email,  bookingDate, noOfGuests,eventTime,city,addresss,Host,BallonDeco,Godi,Car,Pandit,PaperBlast,FogMachine,MicSound,MicSoundScreen,FlowerDeco,Chairs,Plates,Tables,LightSet,placePrice,totalprice) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', [eventLoc,username, mobileNo,email, bookingDate, noOfGuests, eventTime,city,addresss,Host,BallonDeco,Godi,Car,Pandit,PaperBlast,FogMachine,MicSound,MicSoundScreen,FlowerDeco,Chairs,Plates,Tables,LightSet,placePrice,totalprice], (error, results, fields) => {
         if (error) {
             console.error(error);
             resp.status(500).send('Failed to place Order'); // Respond with an error status
