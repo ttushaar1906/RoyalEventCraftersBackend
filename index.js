@@ -101,7 +101,7 @@ app.post('/orders', (req, resp) => {
             resp.status(500).send('Failed to place Order'); // Respond with an error status
         } else {
             console.log('Order has been added to the database.');
-            console.log(totalCost);
+            console.log(city);
             // console.log(price);
             resp.sendStatus(200); // Respond with a success status
         }
