@@ -45,7 +45,6 @@ app.post("/login", (req, resp) => {
   );
 });
 
-
 // signup
 app.post('/signup', (req, resp) => {
   const { username, email, password } = req.body;
@@ -107,8 +106,6 @@ app.post('/orders', (req, resp) => {
         }
     });
 })
-
-
 
 // contant us
 app.post('/Contact', (req, resp) => {

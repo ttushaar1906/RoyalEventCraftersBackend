@@ -187,10 +187,6 @@ router.get('/RoyalEvent/pressconferences', (req, res) => {
     });
 });
 
-//Bill
-
-
-
 //Admi section
 //  1 ) Orders
 router.get('/RoyalEvent/Admi', (req, res) => {
@@ -218,7 +214,6 @@ router.get('/RoyalEvent/Admi/contact', (req, res) => {
 });
 
 // 3 Feedback
-
 router.get('/RoyalEvent/Admi/review', (req, res) => {
     connection.query('SELECT * FROM feedback' , (err, results) => {
         if (err) {
@@ -227,6 +222,47 @@ router.get('/RoyalEvent/Admi/review', (req, res) => {
         } else {
             console.log(results);
             res.json(results); // Send the results as JSON to the client
+        }
+    });
+});
+
+//dashboard
+router.get('/orderDetails', (req, res) => {
+    const userEmail = req.query.email;
+    console.log(userEmail);
+    if (!userEmail) {
+        return res.status(400).send('Email parameter is required');
+    }
+
+    const query = 'SELECT * FROM orders WHERE email = ?';
+
+    connection.query(query, [userEmail], (err, results) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error retrieving data from the database');
+        } else {
+            console.log(results);
+            res.json(results); 
+        }
+    });
+});
+
+router.delete('/orderDetails', (req, res) => {
+    const userEmail = req.query.email;
+
+    if (!userEmail) {
+        return res.status(400).send('Email parameter is required');
+    }
+
+    const query = 'DELETE FROM orders WHERE email = ?';
+
+    connection.query(query, [userEmail], (err, results) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error deleting data from the database');
+        } else {
+            console.log(results);
+            res.json({ message: 'Order deleted successfully' });
         }
     });
 });
